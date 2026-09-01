@@ -13,7 +13,7 @@ export function HomePage() {
           <div className="hero-copy">
             <p className="eyebrow">Kết nối tri thức với cuộc sống</p>
             <h1>Sách học, mở ngay khi cần.</h1>
-            <p className="hero-lead">Chọn lớp, tìm đúng sách và đọc trực tiếp trên mọi thiết bị.</p>
+            <p className="hero-lead">Chọn lớp, tìm đúng sách và đọc trực tiếp ở mọi nơi.</p>
             <a className="primary-action" href="#chon-lop">Chọn lớp <ArrowRight size={19} weight="bold" /></a>
           </div>
           <div className="cover-showcase" aria-label="Một số sách trong thư viện">
