@@ -45,8 +45,7 @@ Tệp được lưu tại `staging/pdfs/<drive-file-id>.pdf`. Không đổi ID v
 
 ```powershell
 npx wrangler login
-npx wrangler r2 bucket create thu-vien-sgk-books
-npx wrangler r2 bucket create thu-vien-sgk-books-preview
+npx wrangler r2 bucket create thu-vien-sgk
 ```
 
 4. Chạy thử một tệp trước:
@@ -78,7 +77,7 @@ Sau triển khai, kiểm tra `HEAD`, tải toàn phần, Range `206`, chế đ�
 
 ## Triển khai Vercel
 
-Vercel phù hợp để host frontend React/Vite. PDF vẫn nên nằm ở Cloudflare R2 hoặc một API khác vì kho sách hiện lớn gần 9,4 GB.
+Vercel phù hợp để host frontend React/Vite. PDF vẫn nên nằm ở Cloudflare R2 bucket `thu-vien-sgk` hoặc một API khác vì kho sách hiện lớn gần 9,4 GB.
 
 Trong Vercel, chọn repo `thu-vien-sgk` và dùng các giá trị:
 

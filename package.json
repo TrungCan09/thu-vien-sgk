@@ -16,7 +16,7 @@
     "test:e2e": "playwright test",
     "test:a11y": "playwright test tests/e2e/accessibility.spec.ts",
     "deploy": "npm run build && wrangler pages deploy dist --project-name thu-vien-sgk",
-    "r2:check": "wrangler r2 bucket info thu-vien-sgk-books"
+    "r2:check": "wrangler r2 bucket info thu-vien-sgk"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

@@ -62,7 +62,7 @@ async function processFile(file) {
   if (upload) {
     const book = parseBookFile(file);
     const wrangler = process.platform === "win32" ? "npx.cmd" : "npx";
-    const objectPath = `thu-vien-sgk-books/${book.assetKey}`;
+    const objectPath = `thu-vien-sgk/${book.assetKey}`;
     const expectedHash = await sha256(pdfPath);
     const verifyPath = path.join(r2Verify, `${file.id}.pdf`);
     await run(wrangler, ["wrangler", "r2", "object", "put", objectPath, "--file", pdfPath, "--content-type", "application/pdf", "--remote"], { maxBuffer: 8 * 1024 * 1024 });
