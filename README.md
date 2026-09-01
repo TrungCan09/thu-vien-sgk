@@ -76,6 +76,25 @@ Nếu `thu-vien-sgk.pages.dev` đã có chủ sở hữu, đổi tên project tr
 
 Sau triển khai, kiểm tra `HEAD`, tải toàn phần, Range `206`, chế độ inline và `?download=1` trên `/api/books/:id`. Thiết lập cảnh báo dung lượng trong Cloudflare khi bucket vượt 9,5 GB.
 
+## Triển khai Vercel
+
+Vercel phù hợp để host frontend React/Vite. PDF vẫn nên nằm ở Cloudflare R2 hoặc một API khác vì kho sách hiện lớn gần 9,4 GB.
+
+Trong Vercel, chọn repo `thu-vien-sgk` và dùng các giá trị:
+
+- Framework Preset: `Vite`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Install Command: `npm install`
+
+Nếu API đọc PDF nằm ở domain khác, thêm biến môi trường:
+
+```text
+VITE_BOOKS_API_BASE_URL=https://ten-domain-api-cua-ban
+```
+
+Không thêm dấu `/` cuối URL. Khi không đặt biến này, app sẽ gọi `/api/books/:id`, phù hợp cho chạy local hoặc Cloudflare Pages Function cùng domain.
+
 ## Cấu trúc quan trọng
 
 - `src/pages`: trang chủ, trang lớp và trang sách.

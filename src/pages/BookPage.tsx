@@ -3,6 +3,7 @@ import { Badge } from "@radix-ui/themes";
 import { lazy, Suspense, useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { BookCover } from "../components/BookCover";
+import { getBookUrl } from "../lib/book-urls";
 import { formatBytes, getBookBySlug } from "../lib/catalog";
 import { BOOK_TYPE_LABELS } from "../types";
 
@@ -32,7 +33,7 @@ export function BookPage() {
               <div><dt>Số trang</dt><dd>{book.pageCount ? `${book.pageCount} trang` : "Đang cập nhật"}</dd></div>
               <div><dt>Dung lượng</dt><dd>{formatBytes(book.sizeBytes)}</dd></div>
             </dl>
-            <a className="secondary-action" href={`/api/books/${book.id}?download=1`}><DownloadSimple size={19} weight="bold" /> Tải PDF</a>
+            <a className="secondary-action" href={getBookUrl(book.id, { download: true })}><DownloadSimple size={19} weight="bold" /> Tải PDF</a>
           </div>
         </div>
         <div className="reader-heading">

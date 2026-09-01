@@ -3,6 +3,7 @@ import { Button, IconButton, Skeleton, Tooltip } from "@radix-ui/themes";
 import { GlobalWorkerOptions, getDocument, type PDFDocumentProxy, type RenderTask } from "pdfjs-dist";
 import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import { useEffect, useRef, useState } from "react";
+import { getBookUrl } from "../lib/book-urls";
 import type { Book } from "../types";
 
 GlobalWorkerOptions.workerSrc = workerUrl;
@@ -21,7 +22,7 @@ export default function PdfViewer({ book }: { book: Book }) {
   const viewerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const task = getDocument({ url: `/api/books/${book.id}`, rangeChunkSize: 262_144 });
+    const task = getDocument({ url: getBookUrl(book.id), rangeChunkSize: 262_144 });
     task.promise.then((pdf) => {
       setDocument(pdf);
       setTotal(pdf.numPages);
@@ -85,7 +86,7 @@ export default function PdfViewer({ book }: { book: Book }) {
         <WarningCircle size={38} weight="duotone" />
         <h2>Không mở được sách</h2>
         <p>{error}</p>
-        <a className="primary-action" href={`/api/books/${book.id}?download=1`}><DownloadSimple size={19} weight="bold" /> Tải PDF</a>
+        <a className="primary-action" href={getBookUrl(book.id, { download: true })}><DownloadSimple size={19} weight="bold" /> Tải PDF</a>
       </div>
     );
   }
@@ -110,7 +111,7 @@ export default function PdfViewer({ book }: { book: Book }) {
           <span className="zoom-value">{Math.round(zoom * 100)}%</span>
           <Tooltip content="Phóng to"><IconButton aria-label="Phóng to" variant="soft" disabled={zoom >= 1.75} onClick={() => setZoom((value) => Math.min(1.75, value + 0.15))}><Plus size={19} weight="bold" /></IconButton></Tooltip>
           <Tooltip content="Toàn màn hình"><IconButton aria-label="Toàn màn hình" variant="soft" onClick={requestFullscreen}><ArrowsOut size={19} weight="bold" /></IconButton></Tooltip>
-          <Button asChild><a href={`/api/books/${book.id}?download=1`}><DownloadSimple size={18} weight="bold" /> Tải PDF</a></Button>
+          <Button asChild><a href={getBookUrl(book.id, { download: true })}><DownloadSimple size={18} weight="bold" /> Tải PDF</a></Button>
         </div>
       </div>
       <div className="pdf-stage" ref={stageRef} aria-busy={rendering}>
