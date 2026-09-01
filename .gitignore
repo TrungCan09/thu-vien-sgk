@@ -5,6 +5,7 @@ playwright-report/
 test-results/
 staging/
 tmp/
+.tools/
 .wrangler/
 .dev.vars
 *.log
